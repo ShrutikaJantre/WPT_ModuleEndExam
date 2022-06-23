@@ -1,3 +1,3 @@
 # WPT_ModuleEndExam
 
-Forgot to add screenshots, which i have added now.
+Forgot to add two more screenshots, which i have added now.
