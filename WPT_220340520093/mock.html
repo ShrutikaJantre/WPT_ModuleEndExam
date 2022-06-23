@@ -1,0 +1,95 @@
+<html>
+
+<body>
+
+	<!-- <form action="poc2" method="get">
+<Br/>whocares<input type="text" name="whocares"/>
+<input type="submit" value="get"/>
+</form>
+
+
+<form action="poc1" method="post">
+<Br/>whocares<input type="text" name="whocares"/>
+<input type="submit" value="post"/>
+</form>
+
+<button id="b2"> jquery works</button> -->
+
+	Book id <input type="text" name="bookid" id="bookid" placeholder="Enter Book id"><span id="msg"> </span><br><br>
+	Book name <input type="text" name="bookname" id="bookname" placeholder="Book Name"><br><br>
+	Price <input type="text" name="price" id="price" placeholder="Price"><br><br>
+	<input type="button" name="updatebook" id="updatebook" value="Update book">
+
+</body>
+
+<script src="/jquery.js"></script>
+<script>//our scrip will come here 
+
+
+
+	$(document).ready(function () {
+		
+		$("#bookid").blur(() => {
+			//console.log("jquery works");
+			// alert("jquery works")
+
+			let input = { bookid: $("#bookid").val() };
+			let parameterstothefunction = {
+				data: input,
+				type: 'get',
+				dataType: "json",
+				url: "http://localhost:8081/getInfo",
+				success: (data) => {
+					if (data.status === true) {
+						$("#msg").text("bookid is found");
+						$("#bookname").val(data.book.bookname);
+						$("price").val(data.book.price);
+					} else {
+						$("#msg").text("bookid not found");
+					}
+				},
+				error: (data) => {
+					console.log("Cannot connect to the server")
+				}
+			};
+			$.ajax(parameterstothefunction);
+
+		});
+
+		$("#updatebook").click(() => {
+			//console.log("jquery works");
+			// alert("jquery works")
+
+			let input = { 
+				bookid: $("#bookid").val(),
+				bookname:$("#bookname").val(),
+				price:$("#price").val(),
+			};
+			let parameterstothefunction = {
+				data: input,
+				type: 'get',
+				dataType: "json",
+				url: "http://localhost:8081/updateInfo",
+				success: (data) => {
+					if (data.status === true) {
+						$("#msg").text("Upadted..!!");
+						$("#price").val();
+					} else {
+						$("#msg").text("Cannot Update..!!");
+					}
+				},
+				error: (data) => {
+					console.log("Cannot connect to the server")
+				}
+			};
+			$.ajax(parameterstothefunction);
+
+		});
+
+	});
+
+
+</script>
+
+
+</html>
